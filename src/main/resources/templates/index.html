@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>People List</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        let people;
+
+        function init() {
+            $.getJSON('/people', (resp) => {
+                console.log('RESPONSE DELIVERED, CALLBACK PERFORMED')
+                people = resp;
+                let list = $('#person');
+                for (let p of people)
+                    list.append(`${p.name} ${p.surname} ${p.years} <br/><br/>`)
+            });
+        }
+        function printPeople()
+        {
+            console.log(people);
+        }
+    </script>
 </head>
 <body>
-$END$
+<div id="person"></div>
+<button onclick="printPeople()">Print on console</button>
+<script>init()</script>
 </body>
 </html>
